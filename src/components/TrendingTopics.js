@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaTwitter, FaSignOutAlt, FaFire, FaFilter, FaHeart, FaRetweet, FaComment, FaShare } from 'react-icons/fa';
+import grokService from '../services/grokService';
 
 const Container = styled.div`
   width: 100%;
@@ -310,6 +311,8 @@ const ModalTitle = styled.h2`
 const TrendingTopics = ({ topics, loading, onLogout }) => {
   const [filter, setFilter] = useState('all');
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const [tweetsLoading, setTweetsLoading] = useState(false);
+  const [tweetsData, setTweetsData] = useState({});
 
   const categories = ['all', 'Leadership', 'Recruitment', 'Culture', 'Development', 'Compensation', 'Engagement', 'Diversity', 'Remote Work', 'Wellness', 'Digital', 'Compliance', 'Performance', 'Career', 'Onboarding', 'Conflict', 'HR Tech', 'Sustainability', 'Innovation', 'Change'];
 
@@ -319,6 +322,32 @@ const TrendingTopics = ({ topics, loading, onLogout }) => {
 
   const totalTweets = topics.reduce((sum, topic) => sum + topic.tweets, 0);
   const avgTweets = Math.round(totalTweets / topics.length);
+
+  const handleTopicClick = async (topic) => {
+    setSelectedTopic(topic);
+    setTweetsLoading(true);
+    
+    try {
+      // Check if we already have tweets for this topic
+      if (!tweetsData[topic.topic]) {
+        const response = await grokService.searchTweetsForTopic(topic.topic);
+        setTweetsData(prev => ({
+          ...prev,
+          [topic.topic]: response.tweets || []
+        }));
+      }
+    } catch (error) {
+      console.error('Error fetching tweets:', error);
+      // Use fallback data if API fails
+      const fallbackResponse = grokService.getFallbackTweetsForTopic(topic.topic);
+      setTweetsData(prev => ({
+        ...prev,
+        [topic.topic]: fallbackResponse.tweets || []
+      }));
+    } finally {
+      setTweetsLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -382,10 +411,10 @@ const TrendingTopics = ({ topics, loading, onLogout }) => {
 
         <TopicsGrid>
           {filteredTopics.map((topic, index) => (
-            <TopicCard 
-              key={topic.id}
-              onClick={() => setSelectedTopic(topic)}
-            >
+                         <TopicCard 
+               key={topic.id}
+               onClick={() => handleTopicClick(topic)}
+             >
               <TopicHeader>
                 <TopicTitle>{topic.topic}</TopicTitle>
                 <TopicRank>{topic.id}</TopicRank>
@@ -411,8 +440,13 @@ const TrendingTopics = ({ topics, loading, onLogout }) => {
               Top 10 Tweets - {selectedTopic.topic}
             </ModalTitle>
             
-            {selectedTopic.popularTweets && selectedTopic.popularTweets.length > 0 ? (
-              selectedTopic.popularTweets.map((tweet, index) => (
+                         {tweetsLoading ? (
+               <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
+                 <Spinner />
+                 Carregando tweets...
+               </div>
+             ) : tweetsData[selectedTopic.topic] && tweetsData[selectedTopic.topic].length > 0 ? (
+               tweetsData[selectedTopic.topic].map((tweet, index) => (
                 <TweetCard key={tweet.id}>
                   <TweetHeader>
                     <TweetAuthor>{tweet.author}</TweetAuthor>

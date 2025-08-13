@@ -141,11 +141,11 @@ function App() {
       setLoading(true);
       
       try {
-        // Fetch real-time data from Grok
+        // Fetch real-time trending topics from Grok
         const data = await grokService.searchTrendingHRTopics();
         setTrendingTopics(data.topics || []);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching trending topics:', error);
         // Use fallback data if API fails
         setTrendingTopics(mockTrendingTopics);
       } finally {
