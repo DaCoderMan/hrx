@@ -6,11 +6,12 @@ import grokService from '../services/grokService';
 const Container = styled.div`
   width: 100%;
   max-width: 1200px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
   animation: slideIn 0.6s ease-out;
 `;
 
@@ -24,31 +25,35 @@ const Header = styled.div`
 `;
 
 const Title = styled.h1`
-  color: #333;
-  font-size: 2rem;
-  font-weight: 700;
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: 800;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 const LogoutButton = styled.button`
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
   color: white;
   border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
+  padding: 14px 24px;
+  border-radius: 12px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
   display: flex;
   align-items: center;
   gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(255, 107, 107, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(255, 71, 87, 0.4);
+    background: linear-gradient(135deg, #ff5e6c 0%, #ff4a55 100%);
   }
 `;
 
@@ -60,22 +65,31 @@ const Stats = styled.div`
 `;
 
 const StatCard = styled.div`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2) 0%, rgba(0, 102, 255, 0.2) 100%);
   color: white;
-  padding: 20px;
-  border-radius: 15px;
+  padding: 24px;
+  border-radius: 20px;
   text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.3) 0%, rgba(0, 102, 255, 0.3) 100%);
+  }
 `;
 
 const StatNumber = styled.div`
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 5px;
 `;
 
 const StatLabel = styled.div`
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   opacity: 0.9;
 `;
 
@@ -88,18 +102,22 @@ const FilterBar = styled.div`
 `;
 
 const FilterButton = styled.button`
-  background: ${props => props.active ? '#1DA1F2' : 'white'};
-  color: ${props => props.active ? 'white' : '#666'};
-  border: 2px solid ${props => props.active ? '#1DA1F2' : '#e1e5e9'};
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
+  background: ${props => props.active ? 'linear-gradient(135deg, #00d4ff 0%, #0066ff 100%)' : 'rgba(255, 255, 255, 0.1)'};
+  color: ${props => props.active ? 'white' : 'rgba(255, 255, 255, 0.8)'};
+  border: 2px solid ${props => props.active ? '#00d4ff' : 'rgba(255, 255, 255, 0.3)'};
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
 
   &:hover {
-    background: ${props => props.active ? '#1DA1F2' : '#f8f9fa'};
-    border-color: #1DA1F2;
+    background: ${props => props.active ? 'linear-gradient(135deg, #00e6ff 0%, #0077ff 100%)' : 'rgba(255, 255, 255, 0.2)'};
+    border-color: #00d4ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
   }
 `;
 
@@ -110,17 +128,21 @@ const TopicsGrid = styled.div`
 `;
 
 const TopicCard = styled.div`
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease;
-  border-left: 4px solid #1DA1F2;
+  border-left: 4px solid #00d4ff;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    border-left: 4px solid #00e6ff;
   }
 `;
 
@@ -132,25 +154,27 @@ const TopicHeader = styled.div`
 `;
 
 const TopicTitle = styled.h3`
-  color: #333;
-  font-size: 1.1rem;
-  font-weight: 600;
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 700;
   margin: 0;
   flex: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 `;
 
 const TopicRank = styled.div`
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  background: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);
   color: white;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 0.9rem;
-  margin-left: 10px;
+  font-size: 1rem;
+  margin-left: 12px;
+  box-shadow: 0 4px 8px rgba(0, 212, 255, 0.3);
 `;
 
 const TopicStats = styled.div`
@@ -161,18 +185,21 @@ const TopicStats = styled.div`
 `;
 
 const TweetCount = styled.div`
-  color: #1DA1F2;
-  font-weight: 600;
-  font-size: 1.1rem;
+  color: #00d4ff;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 `;
 
 const Category = styled.span`
-  background: #f8f9fa;
-  color: #666;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 `;
 
 const LoadingSpinner = styled.div`
@@ -180,13 +207,13 @@ const LoadingSpinner = styled.div`
   justify-content: center;
   align-items: center;
   height: 200px;
-  font-size: 1.2rem;
-  color: #666;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.8);
 `;
 
 const Spinner = styled.div`
-  border: 3px solid #f3f3f3;
-  border-top: 3px solid #1DA1F2;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid #00d4ff;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -216,43 +243,59 @@ const TweetsModal = styled.div`
 `;
 
 const TweetsContainer = styled.div`
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
+  background: rgba(15, 15, 35, 0.95);
+  border-radius: 24px;
+  padding: 40px;
   max-width: 800px;
   max-height: 80vh;
   overflow-y: auto;
   position: relative;
   animation: fadeIn 0.3s ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
 `;
 
 const CloseButton = styled.button`
   position: absolute;
-  top: 15px;
-  right: 15px;
-  background: #ff6b6b;
+  top: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
   color: white;
   border: none;
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3);
 
   &:hover {
-    background: #ee5a52;
+    background: linear-gradient(135deg, #ff5e6c 0%, #ff4a55 100%);
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(255, 71, 87, 0.4);
   }
 `;
 
 const TweetCard = styled.div`
-  background: #f8f9fa;
-  border-radius: 12px;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-left: 3px solid #1DA1F2;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-left: 4px solid #00d4ff;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateX(5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const TweetHeader = styled.div`
@@ -263,36 +306,39 @@ const TweetHeader = styled.div`
 `;
 
 const TweetAuthor = styled.div`
-  font-weight: 600;
-  color: #1DA1F2;
+  font-weight: 700;
+  color: #00d4ff;
   font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 `;
 
 const TweetRank = styled.div`
-  background: #ff6b6b;
+  background: linear-gradient(135deg, #00d4ff 0%, #0066ff 100%);
   color: white;
-  width: 25px;
-  height: 25px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
   font-size: 12px;
+  box-shadow: 0 2px 4px rgba(0, 212, 255, 0.3);
 `;
 
 const TweetText = styled.div`
-  color: #333;
-  font-size: 14px;
-  line-height: 1.5;
-  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 `;
 
 const TweetStats = styled.div`
   display: flex;
   gap: 15px;
-  font-size: 12px;
-  color: #666;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
 `;
 
 const TweetStat = styled.div`
@@ -302,10 +348,12 @@ const TweetStat = styled.div`
 `;
 
 const ModalTitle = styled.h2`
-  color: #333;
-  margin-bottom: 20px;
+  color: #ffffff;
+  margin-bottom: 24px;
   text-align: center;
-  font-size: 1.5rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 const TrendingTopics = ({ topics, loading, onLogout }) => {
@@ -394,10 +442,10 @@ const TrendingTopics = ({ topics, loading, onLogout }) => {
         </Stats>
 
         <FilterBar>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#666' }}>
-            <FaFilter />
-            <span>Filtrar por categoria:</span>
-          </div>
+                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'rgba(255, 255, 255, 0.8)' }}>
+             <FaFilter />
+             <span>Filtrar por categoria:</span>
+           </div>
           {categories.map(category => (
             <FilterButton
               key={category}
@@ -441,7 +489,7 @@ const TrendingTopics = ({ topics, loading, onLogout }) => {
             </ModalTitle>
             
                          {tweetsLoading ? (
-               <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
+               <div style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 0.8)', padding: '20px' }}>
                  <Spinner />
                  Carregando tweets...
                </div>
@@ -469,11 +517,11 @@ const TrendingTopics = ({ topics, loading, onLogout }) => {
                   </TweetStats>
                 </TweetCard>
               ))
-            ) : (
-              <div style={{ textAlign: 'center', color: '#666', padding: '20px' }}>
-                Nenhum tweet disponível para este tópico.
-              </div>
-            )}
+                         ) : (
+               <div style={{ textAlign: 'center', color: 'rgba(255, 255, 255, 0.7)', padding: '20px' }}>
+                 Nenhum tweet disponível para este tópico.
+               </div>
+             )}
           </TweetsContainer>
         </TweetsModal>
       )}

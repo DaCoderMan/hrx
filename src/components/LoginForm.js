@@ -3,22 +3,24 @@ import styled from 'styled-components';
 import { FaUser, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const LoginContainer = styled.div`
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  padding: 48px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   animation: fadeIn 0.6s ease-out;
 `;
 
 const Title = styled.h2`
   text-align: center;
-  color: #333;
-  margin-bottom: 30px;
-  font-size: 1.8rem;
-  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 32px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
 const Form = styled.form`
@@ -33,21 +35,24 @@ const InputGroup = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  padding: 15px 20px 15px 50px;
-  border: 2px solid #e1e5e9;
-  border-radius: 12px;
-  font-size: 16px;
+  padding: 18px 20px 18px 50px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  font-size: 18px;
   transition: all 0.3s ease;
-  background: white;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  backdrop-filter: blur(10px);
 
   &:focus {
     outline: none;
-    border-color: #1DA1F2;
-    box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.1);
+    border-color: #00d4ff;
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
   }
 
   &::placeholder {
-    color: #999;
+    color: rgba(255, 255, 255, 0.7);
   }
 `;
 
@@ -56,7 +61,7 @@ const Icon = styled.div`
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 18px;
 `;
 
@@ -67,39 +72,43 @@ const PasswordToggle = styled.button`
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: #666;
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   font-size: 16px;
   padding: 5px;
+  transition: all 0.3s ease;
 
   &:hover {
-    color: #1DA1F2;
+    color: #00d4ff;
   }
 `;
 
 const LoginButton = styled.button`
-  background: linear-gradient(135deg, #1DA1F2 0%, #0d8bd9 100%);
+  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 50%, #0066ff 100%);
   color: white;
   border: none;
-  padding: 15px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
+  padding: 20px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 10px;
+  margin-top: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(29, 161, 242, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
+    background: linear-gradient(135deg, #00e6ff 0%, #00aadd 50%, #0077ff 100%);
   }
 
   &:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
   }
 
   &:disabled {
-    background: #ccc;
+    background: rgba(255, 255, 255, 0.2);
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
@@ -107,14 +116,15 @@ const LoginButton = styled.button`
 `;
 
 const Credentials = styled.div`
-  background: #f8f9fa;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 24px;
   text-align: center;
-  font-size: 14px;
-  color: #666;
-  border: 1px solid #e9ecef;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
 `;
 
 const LoginForm = ({ onLogin }) => {

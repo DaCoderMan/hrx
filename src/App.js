@@ -25,15 +25,18 @@ const Logo = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  font-size: 2.5rem;
-  font-weight: bold;
-  margin-bottom: 10px;
+  gap: 12px;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   opacity: 0.9;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
 `;
 
 function App() {
