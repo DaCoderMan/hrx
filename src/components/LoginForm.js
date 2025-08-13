@@ -15,27 +15,21 @@ const LoginContainer = styled.div`
 `;
 
 const Title = styled.h2`
-  text-align: center;
   color: #ffffff;
   margin-bottom: 32px;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 700;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
 const InputGroup = styled.div`
   position: relative;
+  margin-bottom: 24px;
 `;
 
 const Input = styled.input`
   width: 100%;
-  padding: 18px 20px 18px 50px;
+  padding: 20px 20px 20px 50px;
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 16px;
   font-size: 18px;
@@ -44,47 +38,46 @@ const Input = styled.input`
   color: #ffffff;
   backdrop-filter: blur(10px);
 
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
   &:focus {
     outline: none;
     border-color: #00d4ff;
-    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
     background: rgba(255, 255, 255, 0.15);
-  }
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
   }
 `;
 
 const Icon = styled.div`
   position: absolute;
-  left: 15px;
+  left: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 18px;
 `;
 
 const PasswordToggle = styled.button`
   position: absolute;
-  right: 15px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
-  font-size: 16px;
-  padding: 5px;
-  transition: all 0.3s ease;
+  font-size: 18px;
+  transition: color 0.3s ease;
 
   &:hover {
-    color: #00d4ff;
+    color: rgba(255, 255, 255, 0.8);
   }
 `;
 
 const LoginButton = styled.button`
-  background: linear-gradient(135deg, #00d4ff 0%, #0099cc 50%, #0066ff 100%);
+  background: linear-gradient(45deg, #00d4ff, #008cff);
   color: white;
   border: none;
   padding: 20px;
@@ -92,26 +85,20 @@ const LoginButton = styled.button`
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
+  width: 100%;
   transition: all 0.3s ease;
-  margin-top: 16px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  box-shadow: 0 8px 16px rgba(0, 212, 255, 0.3);
 
   &:hover {
+    background: linear-gradient(45deg, #00e6ff, #0099ff);
     transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(0, 212, 255, 0.4);
-    background: linear-gradient(135deg, #00e6ff 0%, #00aadd 50%, #0077ff 100%);
+    box-shadow: 0 12px 24px rgba(0, 212, 255, 0.4);
   }
 
   &:active {
     transform: translateY(-1px);
-  }
-
-  &:disabled {
-    background: rgba(255, 255, 255, 0.2);
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
   }
 `;
 
@@ -124,50 +111,41 @@ const Credentials = styled.div`
   font-size: 16px;
   color: rgba(255, 255, 255, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
 `;
 
 const LoginForm = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate API call delay
-    setTimeout(() => {
-      onLogin(username, password);
-      setIsLoading(false);
-    }, 1000);
+    onLogin(username, password);
   };
 
   return (
-    <LoginContainer className="fade-in">
-      <Title>🔐 Acesso Restrito</Title>
-      <Form onSubmit={handleSubmit}>
+    <LoginContainer>
+      <Title>Login</Title>
+      <form onSubmit={handleSubmit}>
         <InputGroup>
           <Icon>
             <FaUser />
           </Icon>
           <Input
             type="text"
-            placeholder="Usuário"
+            placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
           />
         </InputGroup>
-
         <InputGroup>
           <Icon>
             <FaLock />
           </Icon>
           <Input
             type={showPassword ? 'text' : 'password'}
-            placeholder="Senha"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
@@ -179,15 +157,14 @@ const LoginForm = ({ onLogin }) => {
             {showPassword ? <FaEyeSlash /> : <FaEye />}
           </PasswordToggle>
         </InputGroup>
-
-        <LoginButton type="submit" disabled={isLoading}>
-          {isLoading ? 'Entrando...' : 'Entrar'}
+        <LoginButton type="submit">
+          Entrar
         </LoginButton>
-      </Form>
-
+      </form>
       <Credentials>
-        <strong>💡 Dica:</strong><br />
-        Entre em contato com o administrador para obter suas credenciais de acesso.
+        <strong>Demo Credentials:</strong><br />
+        Username: hr4all<br />
+        Password: hr4allonx
       </Credentials>
     </LoginContainer>
   );
