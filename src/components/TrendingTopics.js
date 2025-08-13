@@ -115,6 +115,7 @@ const TopicCard = styled.div`
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   border-left: 4px solid #1DA1F2;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-5px);
@@ -197,20 +198,7 @@ const Spinner = styled.div`
   }
 `;
 
-const TopicCard = styled.div`
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  border-left: 4px solid #1DA1F2;
-  cursor: pointer;
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-  }
-`;
 
 const TweetsModal = styled.div`
   position: fixed;
