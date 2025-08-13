@@ -320,7 +320,7 @@ const TrendingTopics = ({ topics, loading, onLogout }) => {
 
       <Stats>
         <StatCard>
-          <StatNumber>{topics.length}</StatNumber>
+          <StatNumber>1</StatNumber>
           <StatLabel>Total de Topics</StatLabel>
         </StatCard>
         <StatCard>
