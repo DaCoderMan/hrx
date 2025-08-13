@@ -12,12 +12,12 @@ class GrokService {
     try {
       const prompt = `
         Pesquise os top 20 trending topics relacionados a Recursos Humanos (RH) no Brasil no X (Twitter) neste momento.
-        
+
         Para cada topic, forneça:
         1. Nome do topic em português
         2. Número estimado de tweets
         3. Categoria (Leadership, Recruitment, Culture, Development, Compensation, Engagement, Diversity, Remote Work, Wellness, Digital, Compliance, Performance, Career, Onboarding, Conflict, HR Tech, Sustainability, Innovation, Change)
-        
+
         Retorne os dados em formato JSON com a seguinte estrutura:
         {
           "topics": [
@@ -29,7 +29,7 @@ class GrokService {
             }
           ]
         }
-        
+
         Certifique-se de que todos os dados sejam reais e atuais, baseados em pesquisas reais no X.
       `;
 
@@ -58,10 +58,10 @@ class GrokService {
       }
 
       const data = await response.json();
-      
+
       // Parse the response content to extract JSON
       const content = data.choices[0].message.content;
-      
+
       // Try to extract JSON from the response
       const jsonMatch = content.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
@@ -82,14 +82,14 @@ class GrokService {
     try {
       const prompt = `
         Pesquise os 10 tweets mais populares e relevantes sobre "${topicName}" no X (Twitter) no Brasil neste momento.
-        
+
         Para cada tweet, forneça:
         - Texto completo do tweet
         - Autor (username com @)
         - Número de likes
         - Número de retweets
         - Número de comentários
-        
+
         Retorne os dados em formato JSON com a seguinte estrutura:
         {
           "tweets": [
@@ -103,7 +103,7 @@ class GrokService {
             }
           ]
         }
-        
+
         Certifique-se de que todos os tweets sejam reais e atuais, baseados em pesquisas reais no X sobre "${topicName}".
         Os tweets devem ser em português e relacionados especificamente ao tópico "${topicName}".
       `;
@@ -133,10 +133,10 @@ class GrokService {
       }
 
       const data = await response.json();
-      
+
       // Parse the response content to extract JSON
       const content = data.choices[0].message.content;
-      
+
       // Try to extract JSON from the response
       const jsonMatch = content.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
@@ -156,7 +156,7 @@ class GrokService {
   parseTweetResponse(content, topicName) {
     const tweets = [];
     const lines = content.split('\n');
-    
+
     for (const line of lines) {
       if (line.includes('@') && (line.includes('likes') || line.includes('retweets'))) {
         const tweet = this.parseTweetLine(line);
@@ -183,7 +183,7 @@ class GrokService {
           currentTopic.popularTweets = currentTweets;
           topics.push(currentTopic);
         }
-        
+
         const topicName = line.replace(/^\d+\.\s*/, '').trim();
         currentTopic = {
           id: topics.length + 1,
